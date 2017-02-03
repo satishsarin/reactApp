@@ -12,7 +12,11 @@ class App extends React.Component {
 
 	 	_addsong(name){
 	 		this.state.songLists.push(name)
-	 		console.log("changed value--", this.state.songLists)
+			this.setState({songLists: this.state.songLists})
+		}
+
+		_handleRemove(id){
+			this.state.songLists.splice(id,1);
 			this.setState({songLists: this.state.songLists})
 		}
 
@@ -20,7 +24,7 @@ class App extends React.Component {
 	    return (
 			       <div>
 			          <AddItem add={this._addsong.bind(this)} />
-			          <ListItems songs={this.state.songLists} />
+			          <ListItems songs={this.state.songLists} remove={this._handleRemove.bind(this)} />
 			       </div>
 	    );
 	 	}
